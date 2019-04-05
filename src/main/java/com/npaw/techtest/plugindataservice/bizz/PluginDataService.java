@@ -8,8 +8,8 @@ public interface PluginDataService
     /**
      * TODO add description
      *
-     * @param pluginDataParameter
+     * @param parameter
      * @return
      */
-    PluginData getPluginData(PluginDataParameter pluginDataParameter);
+    PluginData getPluginData(GetPluginDataParameter parameter);
 }

@@ -11,7 +11,7 @@ import com.npaw.techtest.plugindataservice.domain.PluginData;
 public class PluginDataServiceImpl implements PluginDataService
 {
     @Override
-    public PluginData getPluginData(final PluginDataParameter pluginDataParameter)
+    public PluginData getPluginData(final GetPluginDataParameter parameter)
     {
         return new PluginData("clusterA", 10, UUID.randomUUID().toString());
     }

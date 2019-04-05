@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class PluginDataParameter
+public class GetPluginDataParameter
 {
     private final Optional<String> accountCode;
     private final Optional<String> targetDevice;

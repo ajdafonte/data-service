@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.npaw.techtest.plugindataservice.bizz.PluginDataParameter;
+import com.npaw.techtest.plugindataservice.bizz.GetPluginDataParameter;
 import com.npaw.techtest.plugindataservice.bizz.PluginDataService;
 import com.npaw.techtest.plugindataservice.common.infra.MappingTool;
 import com.npaw.techtest.plugindataservice.rest.mapper.PluginDataRestMapper;
@@ -30,10 +30,10 @@ public class PluginDataController
                                         @RequestParam(required = false) final String targetDevice,
                                         @RequestParam(required = false) final String pluginVersion)
     {
-        final PluginDataParameter pluginDataParameter = new PluginDataParameter(
+        final GetPluginDataParameter parameter = new GetPluginDataParameter(
             MappingTool.optionalOrNull(accountCode),
             MappingTool.optionalOrNull(targetDevice),
             MappingTool.optionalOrNull(pluginVersion));
-        return PluginDataRestMapper.map(pluginDataService.getPluginData(pluginDataParameter));
+        return PluginDataRestMapper.map(pluginDataService.getPluginData(parameter));
     }
 }
