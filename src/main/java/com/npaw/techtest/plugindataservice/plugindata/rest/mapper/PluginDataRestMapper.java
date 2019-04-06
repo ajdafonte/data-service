@@ -1,7 +1,7 @@
-package com.npaw.techtest.plugindataservice.rest.mapper;
+package com.npaw.techtest.plugindataservice.plugindata.rest.mapper;
 
-import com.npaw.techtest.plugindataservice.domain.PluginData;
-import com.npaw.techtest.plugindataservice.rest.PluginDataRest;
+import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
+import com.npaw.techtest.plugindataservice.plugindata.rest.PluginDataRest;
 
 
 public class PluginDataRestMapper

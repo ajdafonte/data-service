@@ -1,6 +1,6 @@
-package com.npaw.techtest.plugindataservice.bizz;
+package com.npaw.techtest.plugindataservice.plugindata.bizz;
 
-import com.npaw.techtest.plugindataservice.domain.PluginData;
+import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
 
 
 public interface PluginDataService

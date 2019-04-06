@@ -1,6 +1,4 @@
-package com.npaw.techtest.plugindataservice.bizz;
-
-import java.util.Optional;
+package com.npaw.techtest.plugindataservice.plugindata.bizz;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +14,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode
 public class GetPluginDataParameter
 {
-    private final Optional<String> accountCode;
-    private final Optional<String> targetDevice;
-    private final Optional<String> pluginVersion;
+    private final String accountCode;
+    private final String targetDevice;
+    private final String pluginVersion;
 }

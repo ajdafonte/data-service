@@ -1,4 +1,4 @@
-package com.npaw.techtest.plugindataservice.domain;
+package com.npaw.techtest.plugindataservice.plugindata.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

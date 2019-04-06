@@ -14,11 +14,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class ClientConfig
+public class PluginConfig
 {
-    private String accountCode;
     private String targetDevice;
     private String pluginVersion;
-    private int pingTime;
+    private int pingTime = 5;
     private List<HostConfig> hosts;
 }

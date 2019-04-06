@@ -1,4 +1,4 @@
-package com.npaw.techtest.plugindataservice.rest;
+package com.npaw.techtest.plugindataservice.plugindata.rest;
 
 import java.util.Objects;
 
