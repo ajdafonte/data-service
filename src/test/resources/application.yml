@@ -1,0 +1,24 @@
+pluginDataService:
+  clientConfigs:
+    mockAccountCode1:
+      - targetDevice: "mockDevice1"
+        pluginVersion: "mockPluginVersion1"
+        pingTime: 1
+        hosts:
+        - name: "mockCluster1"
+          load: 60
+        - name: "mockCluster2"
+          load: 40
+      - targetDevice: "mockDevice2"
+        pluginVersion: "mockPluginVersion2"
+        pingTime: 10
+        hosts:
+        - name: "mockCluster2"
+          load: 100
+    mockAccountCode2:
+    - targetDevice: "mockDevice1"
+      pluginVersion: "mockPluginVersion1"
+      pingTime: 1
+      hosts:
+      - name: "mockCluster1"
+        load: 100
