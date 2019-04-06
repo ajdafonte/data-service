@@ -63,3 +63,18 @@ pluginDataService:
           load: 50
         - name: "clusterB.com"
           load: 50
+
+#// for a certain client
+# // update plugin config (by target device)
+#   // input: plugin version, pingtime
+#
+#// update hosts load (by target device and cluster name)
+#  // input: name cluster + load
+#
+#
+#
+# // add plugin config
+#   // input: target device, plugin version, pingtime, list of hosts
+#
+# // remove plugin config (by target device)
+#   //

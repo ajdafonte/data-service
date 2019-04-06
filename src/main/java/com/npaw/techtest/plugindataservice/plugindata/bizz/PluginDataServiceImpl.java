@@ -1,45 +1,38 @@
 package com.npaw.techtest.plugindataservice.plugindata.bizz;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.npaw.techtest.plugindataservice.common.config.PluginDataServiceProperties;
 import com.npaw.techtest.plugindataservice.common.domain.HostConfig;
 import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.pluginconfig.bizz.PluginConfigService;
 import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
 
 
 @Service
 public class PluginDataServiceImpl implements PluginDataService
 {
-    private final PluginDataServiceProperties pluginDataServiceProperties;
+    private final PluginConfigService pluginConfigService;
 
     @Autowired
-    public PluginDataServiceImpl(final PluginDataServiceProperties pluginDataServiceProperties)
+    public PluginDataServiceImpl(final PluginConfigService pluginConfigService)
     {
-        this.pluginDataServiceProperties = pluginDataServiceProperties;
+        this.pluginConfigService = pluginConfigService;
     }
 
     @Override
     public PluginData getPluginData(final GetPluginDataParameter parameter)
     {
+        final Optional<PluginConfig> clientDevice = pluginConfigService.findPluginConfig(parameter.accountCode(),
+            parameter.targetDevice(), parameter.pluginVersion());
 
-        final PluginConfig clientDevice =
-            pluginDataServiceProperties.findPluginConfig(parameter.accountCode(), parameter.targetDevice(), parameter.pluginVersion());
-
-        if (clientDevice == null)
-        {
-            return null;
-        }
-        else
-        {
-            return new PluginData(getHost(clientDevice.getHosts()).getName(),
-                clientDevice.getPingTime(), UUID.randomUUID().toString());
-        }
+        return clientDevice.map(pluginConfig ->
+            new PluginData(getHost(pluginConfig.getHosts()).getName(), pluginConfig.getPingTime(), UUID.randomUUID().toString())).orElse(null);
     }
 
     private HostConfig getHost(final List<HostConfig> hosts)

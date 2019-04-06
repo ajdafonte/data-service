@@ -18,12 +18,12 @@ import com.npaw.techtest.plugindataservice.plugindata.rest.mapper.PluginDataRest
 @RestController
 @RequestMapping(value = "/pluginData")
 @Validated
-public class PluginDataController
+public class PluginDataRestController
 {
     private final PluginDataService pluginDataService;
 
     @Autowired
-    public PluginDataController(final PluginDataService pluginDataService)
+    public PluginDataRestController(final PluginDataService pluginDataService)
     {
         this.pluginDataService = pluginDataService;
     }

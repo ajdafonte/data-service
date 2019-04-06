@@ -38,8 +38,8 @@ import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
 
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(PluginDataController.class)
-class PluginDataControllerTest
+@WebMvcTest(PluginDataRestController.class)
+class PluginDataRestControllerTest
 {
     private static final String PLUGIN_DATA_URI = "/pluginData";
 

@@ -38,7 +38,6 @@ dependencies {
     implementation("org.springframework.boot", "spring-boot-devtools")
     implementation("org.springframework.boot", "spring-boot-starter-actuator")
 
-
     // testing
     testImplementation("org.springframework.boot", "spring-boot-starter-test") {
         // Exclude JUnit 4 from starter-test, because it will be used JUnit 5
