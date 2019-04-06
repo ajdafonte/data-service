@@ -48,6 +48,9 @@ dependencies {
     }
     testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.4.0")
     testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.4.0")
+    // IMPORTANT: Use this version. Why? See https://github.com/mockito/mockito/issues/1604
+    testImplementation("org.mockito", "mockito-junit-jupiter", "2.23.4")
+    testImplementation("org.hamcrest", "hamcrest-library", "1.3")
 }
 
 tasks {
