@@ -14,6 +14,8 @@ import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MO
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_TARGET_DEVICE2;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -94,69 +97,35 @@ class PluginDataServicePropertiesTest
         assertThat(result, IsMapContaining.hasEntry(MOCK_ACCOUNT_CODE2, MOCK_PLUGIN_CONFIGS2));
     }
 
-//    // validate search function - ok
-//    @Test
-//    void givenValidSearchParameters_whenFindPluginConfig_thenReturnExpectedPluginConfig()
-//    {
-//        // given
-//        final PluginConfig expected = MOCK_PLUGIN_CONFIG1;
-//        final String mockAccountCode = MOCK_ACCOUNT_CODE1;
-//        final String mockTargetDevice = MOCK_TARGET_DEVICE1;
-//        final String mockPluginVersion = MOCK_PLUGIN_VERSION1;
-//
-//        // when
-//        final PluginConfig result = properties.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
-//
-//        // then
-//        assertNotNull(result);
-//        assertThat(result, is(expected));
-//    }
-//
-//    // validate search function - client does not exist
-//    @Test
-//    void givenUnknownAccountCode_whenFindPluginConfig_thenReturnNullValue()
-//    {
-//        // given
-//        final String mockAccountCode = "mockUnkonwnAccountCode";
-//        final String mockTargetDevice = MOCK_TARGET_DEVICE1;
-//        final String mockPluginVersion = MOCK_PLUGIN_VERSION1;
-//
-//        // when
-//        final PluginConfig result = properties.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
-//
-//        // then
-//        assertNull(result);
-//    }
-//
-//    // validate search function - client ok but targetdevice does not exist
-//    @Test
-//    void givenUnknownTargetDevice_whenFindPluginConfig_thenReturnNullValue()
-//    {
-//        // given
-//        final String mockAccountCode = MOCK_ACCOUNT_CODE1;
-//        final String mockTargetDevice = "mockUnknownTargetDevice";
-//        final String mockPluginVersion = MOCK_PLUGIN_VERSION1;
-//
-//        // when
-//        final PluginConfig result = properties.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
-//
-//        // then
-//        assertNull(result);
-//    }
-//
-//    // validate search function - client ok, targetdevice ok but pluginversion does not exist
-//    @Test
-//    void givenUnknownPluginVersion_whenFindPluginConfig_thenReturnNullValue()
-//    {
-//        // given
-//        final String mockAccountCode = MOCK_ACCOUNT_CODE1;
-//        final String mockTargetDevice = MOCK_TARGET_DEVICE1;
-//        final String mockPluginVersion = "mockUnknownPluginVersion";
-//
-//        // when
-//        final PluginConfig result = properties.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
-//
-//        // then
-//        assertNull(result);
-//    }
+    // getClientConfig - ok
+    @Test
+    void givenExistentAccountCode_whenGetClientConfig_thenReturnExpectedClientConfig()
+    {
+        // given
+        final String mockAccountCode = MOCK_ACCOUNT_CODE1;
+        final List<PluginConfig> expectedResult = MOCK_PLUGIN_CONFIGS1;
+
+        // when
+        final List<PluginConfig> result = properties.getClientConfig(mockAccountCode);
+
+        // then
+        assertNotNull(result);
+        assertThat(result, is(expectedResult));
+        assertThat(result.size(), is(2));
+        assertThat(result, IsIterableContainingInAnyOrder.containsInAnyOrder(MOCK_PLUGIN_CONFIG1, MOCK_PLUGIN_CONFIG2));
+    }
+
+    // getClientConfig - nok
+    @Test
+    void givenUnknownAccountCode_whenGetClientConfig_thenReturnNullValue()
+    {
+        // given
+        final String mockAccountCode = "mockUnknownAccountCode";
+
+        // when
+        final List<PluginConfig> result = properties.getClientConfig(mockAccountCode);
+
+        // then
+        assertNull(result);
+    }
 }
