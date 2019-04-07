@@ -1,43 +1,17 @@
 # server settings
 server:
-  port: 8088
+  port: 80
 
 # logging settings
 logging:
   level:
     com.npaw: DEBUG
 
-# service settings
-#pluginDataService:
-#  clientConfigs:
-#  - accountCode: "clientA"
-#    devices:
-#    - targetDevice: "XBox"
-#      pluginVersion: "3.3.1"
-#      pingTime: 10
-#      hosts:
-#      - name: "clusterA.com"
-#        load: 70
-#      - name: "clusterB.com"
-#        load: 30
-#    - targetDevice: "Panasonic"
-#      pluginVersion: "3.3.2"
-#      pingTime: 5
-#      hosts:
-#      - name: "clusterB.com"
-#        load: 100
-#  - accountCode: "clientB"
-#    devices:
-#    - targetDevice: "osmf"
-#      pluginVersion: "3.3.1"
-#      pingTime: 5
-#      hosts:
-#      - name: "clusterA.com"
-#        load: 50
-#      - name: "clusterB.com"
-#        load: 50
-
 pluginDataService:
+  bizzThreadPoolConfig:
+    corePoolSize: 8
+    maxPoolSize: 16
+    keepAliveTime: 60
   clientConfigs:
     clientA:
       - targetDevice: "XBox"
@@ -63,18 +37,3 @@ pluginDataService:
           load: 50
         - name: "clusterB.com"
           load: 50
-
-#// for a certain client
-# // update plugin config (by target device)
-#   // input: plugin version, pingtime
-#
-#// update hosts load (by target device and cluster name)
-#  // input: name cluster + load
-#
-#
-#
-# // add plugin config
-#   // input: target device, plugin version, pingtime, list of hosts
-#
-# // remove plugin config (by target device)
-#   //

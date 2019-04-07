@@ -27,9 +27,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper;
-import com.npaw.techtest.plugindataservice.common.config.PluginDataServiceProperties;
-import com.npaw.techtest.plugindataservice.common.domain.HostConfig;
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.HostConfigData;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
+import com.npaw.techtest.plugindataservice.config.PluginDataServiceProperties;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -39,9 +39,9 @@ class PluginConfigServiceTest
     private PluginDataServiceProperties pluginDataServiceProperties;
 
     private PluginConfigService pluginConfigService;
-    private List<HostConfig> mockHosts;
-    private PluginConfig mockPluginConfig;
-    private List<PluginConfig> mockCurrentClientConfig;
+    private List<HostConfigData> mockHosts;
+    private PluginConfigData mockPluginConfigData;
+    private List<PluginConfigData> mockCurrentClientConfig;
 
     @BeforeEach
     void setUp()
@@ -50,15 +50,15 @@ class PluginConfigServiceTest
 
         // define default client configuration for mockAccountCode1
         this.mockHosts = Arrays.asList(
-            PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME1, 70),
-            PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME2, 30)
+            PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, 70),
+            PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME2, 30)
         );
-        this.mockPluginConfig = PluginDataServiceTestHelper.generatePluginConfig(
+        this.mockPluginConfigData = PluginDataServiceTestHelper.generatePluginConfigData(
             MOCK_TARGET_DEVICE1,
             MOCK_PLUGIN_VERSION1,
             MOCK_PING_TIME1,
             mockHosts);
-        this.mockCurrentClientConfig = Collections.singletonList(mockPluginConfig);
+        this.mockCurrentClientConfig = Collections.singletonList(mockPluginConfigData);
     }
 
     // getPluginConfigByClient - ok
@@ -70,7 +70,7 @@ class PluginConfigServiceTest
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<List<PluginConfig>> result = pluginConfigService.getPluginConfigByClient(mockAccountCode);
+        final Optional<List<PluginConfigData>> result = pluginConfigService.getPluginConfigByClient(mockAccountCode);
 
         // then
         assertThat(result, is(Optional.of(mockCurrentClientConfig)));
@@ -88,7 +88,7 @@ class PluginConfigServiceTest
         doReturn(null).when(pluginDataServiceProperties).getClientConfig(mockAccountCode);
 
         // when
-        final Optional<List<PluginConfig>> result = pluginConfigService.getPluginConfigByClient(mockAccountCode);
+        final Optional<List<PluginConfigData>> result = pluginConfigService.getPluginConfigByClient(mockAccountCode);
 
         // then
         assertThat(result, is(Optional.empty()));
@@ -107,10 +107,10 @@ class PluginConfigServiceTest
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<PluginConfig> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
+        final Optional<PluginConfigData> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
 
         // then
-        assertThat(result, is(Optional.of(mockPluginConfig)));
+        assertThat(result, is(Optional.of(mockPluginConfigData)));
         verify(pluginDataServiceProperties, times(1)).getClientConfig(mockAccountCode);
         verifyNoMoreInteractions(pluginDataServiceProperties);
     }
@@ -126,7 +126,7 @@ class PluginConfigServiceTest
         doReturn(null).when(pluginDataServiceProperties).getClientConfig(mockAccountCode);
 
         // when
-        final Optional<PluginConfig> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
+        final Optional<PluginConfigData> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
 
         // then
         assertThat(result, is(Optional.empty()));
@@ -145,7 +145,7 @@ class PluginConfigServiceTest
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<PluginConfig> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
+        final Optional<PluginConfigData> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
 
         // then
         assertThat(result, is(Optional.empty()));
@@ -161,16 +161,16 @@ class PluginConfigServiceTest
         final String mockAccountCode = MOCK_ACCOUNT_CODE1;
         final String mockTargetDevice = MOCK_TARGET_DEVICE1;
         final String mockPluginVersion = "mockUnknownPluginVersion";
-        final PluginConfig expectedPluginConfig = PluginDataServiceTestHelper.generatePluginConfig(
+        final PluginConfigData expectedPluginConfigData = PluginDataServiceTestHelper.generatePluginConfigData(
             MOCK_TARGET_DEVICE1,
             MOCK_PLUGIN_VERSION1,
             MOCK_PING_TIME2,
-            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME2, 100)));
-        final List<PluginConfig> expectedClientConfig = Collections.singletonList(expectedPluginConfig);
+            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME2, 100)));
+        final List<PluginConfigData> expectedClientConfig = Collections.singletonList(expectedPluginConfigData);
         when(pluginDataServiceProperties.getClientConfig(mockAccountCode)).thenReturn(expectedClientConfig);
 
         // when
-        final Optional<PluginConfig> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
+        final Optional<PluginConfigData> result = pluginConfigService.findPluginConfig(mockAccountCode, mockTargetDevice, mockPluginVersion);
 
         // then
         assertThat(result, is(Optional.empty()));
@@ -187,16 +187,16 @@ class PluginConfigServiceTest
         final String mockTargetDevice = MOCK_TARGET_DEVICE1;
         final String mockNewPluginVersion = "mockNewPluginVersion";
         final int mockNewPingTime = 100;
-        final PluginConfig expectedPluginConfig =
-            PluginDataServiceTestHelper.generatePluginConfig(MOCK_TARGET_DEVICE1, mockNewPluginVersion, mockNewPingTime, mockHosts);
+        final PluginConfigData expectedPluginConfigData =
+            PluginDataServiceTestHelper.generatePluginConfigData(MOCK_TARGET_DEVICE1, mockNewPluginVersion, mockNewPingTime, mockHosts);
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<PluginConfig> result =
+        final Optional<PluginConfigData> result =
             pluginConfigService.updatePluginConfig(mockAccountCode, mockTargetDevice, mockNewPluginVersion, mockNewPingTime);
 
         // then
-        assertThat(result, is(Optional.of(expectedPluginConfig)));
+        assertThat(result, is(Optional.of(expectedPluginConfigData)));
         verify(pluginDataServiceProperties, times(1)).getClientConfig(mockAccountCode);
         verifyNoMoreInteractions(pluginDataServiceProperties);
     }
@@ -213,7 +213,7 @@ class PluginConfigServiceTest
         doReturn(null).when(pluginDataServiceProperties).getClientConfig(mockAccountCode);
 
         // when
-        final Optional<PluginConfig> result =
+        final Optional<PluginConfigData> result =
             pluginConfigService.updatePluginConfig(mockAccountCode, mockTargetDevice, mockNewPluginVersion, mockNewPingTime);
 
         // then
@@ -234,7 +234,7 @@ class PluginConfigServiceTest
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<PluginConfig> result =
+        final Optional<PluginConfigData> result =
             pluginConfigService.updatePluginConfig(mockAccountCode, mockTargetDevice, mockNewPluginVersion, mockNewPingTime);
 
         // then
@@ -252,21 +252,21 @@ class PluginConfigServiceTest
         final String mockTargetDevice = MOCK_TARGET_DEVICE1;
         final String mockHostName = MOCK_NAME1;
         final int mockNewHostLoad = 75;
-        final List<HostConfig> mockExpectedHosts =
+        final List<HostConfigData> mockExpectedHosts =
             Arrays.asList(
-                PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME1, mockNewHostLoad),
-                PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME2, 30)
+                PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, mockNewHostLoad),
+                PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME2, 30)
             );
-        final PluginConfig expectedPluginConfig =
-            PluginDataServiceTestHelper.generatePluginConfig(MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1, MOCK_PING_TIME1, mockExpectedHosts);
+        final PluginConfigData expectedPluginConfigData =
+            PluginDataServiceTestHelper.generatePluginConfigData(MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1, MOCK_PING_TIME1, mockExpectedHosts);
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<PluginConfig> result =
+        final Optional<PluginConfigData> result =
             pluginConfigService.updatePluginHostConfig(mockAccountCode, mockTargetDevice, mockHostName, mockNewHostLoad);
 
         // then
-        assertThat(result, is(Optional.of(expectedPluginConfig)));
+        assertThat(result, is(Optional.of(expectedPluginConfigData)));
         verify(pluginDataServiceProperties, times(1)).getClientConfig(mockAccountCode);
         verifyNoMoreInteractions(pluginDataServiceProperties);
     }
@@ -283,7 +283,7 @@ class PluginConfigServiceTest
         doReturn(null).when(pluginDataServiceProperties).getClientConfig(mockAccountCode);
 
         // when
-        final Optional<PluginConfig> result =
+        final Optional<PluginConfigData> result =
             pluginConfigService.updatePluginHostConfig(mockAccountCode, mockTargetDevice, mockHostName, mockNewHostLoad);
 
         // then
@@ -304,7 +304,7 @@ class PluginConfigServiceTest
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<PluginConfig> result =
+        final Optional<PluginConfigData> result =
             pluginConfigService.updatePluginHostConfig(mockAccountCode, mockTargetDevice, mockHostName, mockNewHostLoad);
 
         // then
@@ -325,11 +325,11 @@ class PluginConfigServiceTest
         doReturn(mockCurrentClientConfig).when(pluginDataServiceProperties).getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // when
-        final Optional<PluginConfig> result =
+        final Optional<PluginConfigData> result =
             pluginConfigService.updatePluginHostConfig(mockAccountCode, mockTargetDevice, mockHostName, mockNewHostLoad);
 
         // then
-        assertThat(result, is(Optional.of(mockPluginConfig)));
+        assertThat(result, is(Optional.of(mockPluginConfigData)));
         verify(pluginDataServiceProperties, times(1)).getClientConfig(mockAccountCode);
         verifyNoMoreInteractions(pluginDataServiceProperties);
     }

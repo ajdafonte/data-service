@@ -1,4 +1,8 @@
 pluginDataService:
+  bizzThreadPoolConfig:
+    corePoolSize: 8
+    maxPoolSize: 16
+    keepAliveTime: 60
   clientConfigs:
     mockAccountCode1:
       - targetDevice: "mockDevice1"

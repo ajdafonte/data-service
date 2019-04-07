@@ -3,8 +3,9 @@ package com.npaw.techtest.plugindataservice;
 import java.util.Collections;
 import java.util.List;
 
-import com.npaw.techtest.plugindataservice.common.domain.HostConfig;
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.BizzThreadPoolConfigData;
+import com.npaw.techtest.plugindataservice.common.domain.HostConfigData;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 import com.npaw.techtest.plugindataservice.plugindata.bizz.GetPluginDataParameter;
 import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
 import com.npaw.techtest.plugindataservice.plugindata.rest.PluginDataRest;
@@ -25,7 +26,7 @@ public class PluginDataServiceTestHelper
     public static final String MOCK_PLUGIN_VERSION2 = "mockPluginVersion2";
     public static final int MOCK_PING_TIME1 = 1;
     public static final int MOCK_PING_TIME2 = 10;
-    public static final List<HostConfig> MOCK_HOSTS1 = Collections.singletonList(generateHostConfig(MOCK_NAME1, MOCK_LOAD1));
+    public static final List<HostConfigData> MOCK_HOSTS1 = Collections.singletonList(generateHostConfigData(MOCK_NAME1, MOCK_LOAD1));
 
     public static final String MOCK_ACCOUNT_CODE1 = "mockAccountCode1";
     public static final String MOCK_ACCOUNT_CODE2 = "mockAccountCode2";
@@ -33,25 +34,34 @@ public class PluginDataServiceTestHelper
     public static final String MOCK_VIEW_ID1 = "mockViewId1";
     public static final String MOCK_VIEW_ID2 = "mockViewId2";
 
-    public static HostConfig generateHostConfig(final String name, final int load)
+    public static HostConfigData generateHostConfigData(final String name, final int load)
     {
-        final HostConfig hostConfig = new HostConfig();
-        hostConfig.setName(name);
-        hostConfig.setLoad(load);
-        return hostConfig;
+        final HostConfigData hostConfigData = new HostConfigData();
+        hostConfigData.setName(name);
+        hostConfigData.setLoad(load);
+        return hostConfigData;
     }
 
-    public static PluginConfig generatePluginConfig(final String targetDevice,
-                                                    final String pluginVersion,
-                                                    final int pingTime,
-                                                    final List<HostConfig> hosts)
+    public static PluginConfigData generatePluginConfigData(final String targetDevice,
+                                                            final String pluginVersion,
+                                                            final int pingTime,
+                                                            final List<HostConfigData> hosts)
     {
-        final PluginConfig pluginConfig = new PluginConfig();
-        pluginConfig.setTargetDevice(targetDevice);
-        pluginConfig.setPluginVersion(pluginVersion);
-        pluginConfig.setPingTime(pingTime);
-        pluginConfig.setHosts(hosts);
-        return pluginConfig;
+        final PluginConfigData pluginConfigData = new PluginConfigData();
+        pluginConfigData.setTargetDevice(targetDevice);
+        pluginConfigData.setPluginVersion(pluginVersion);
+        pluginConfigData.setPingTime(pingTime);
+        pluginConfigData.setHosts(hosts);
+        return pluginConfigData;
+    }
+
+    public static BizzThreadPoolConfigData generateBizzThreadPoolConfigData(final int corePoolSize, final int maxPoolSize, final int keepAliveTime)
+    {
+        final BizzThreadPoolConfigData threadPoolConfigData = new BizzThreadPoolConfigData();
+        threadPoolConfigData.setCorePoolSize(corePoolSize);
+        threadPoolConfigData.setMaxPoolSize(maxPoolSize);
+        threadPoolConfigData.setKeepAliveTime(keepAliveTime);
+        return threadPoolConfigData;
     }
 
     public static GetPluginDataParameter generateGetPluginDataParameter(final String accountCode,

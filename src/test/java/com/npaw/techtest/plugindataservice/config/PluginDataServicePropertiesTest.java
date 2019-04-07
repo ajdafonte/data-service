@@ -1,4 +1,4 @@
-package com.npaw.techtest.plugindataservice.common.config;
+package com.npaw.techtest.plugindataservice.config;
 
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE1;
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE2;
@@ -32,7 +32,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper;
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 
 
 @ExtendWith(SpringExtension.class)
@@ -46,32 +46,32 @@ class PluginDataServicePropertiesTest
     // - This test uses the application.yaml defined in test/resources
     // - Consider also the values defined in the helper class
 
-    private static final PluginConfig MOCK_PLUGIN_CONFIG1;
-    private static final PluginConfig MOCK_PLUGIN_CONFIG2;
-    private static final PluginConfig MOCK_PLUGIN_CONFIG3;
-    private static final Map<String, List<PluginConfig>> MOCK_CONFIG;
-    private static final List<PluginConfig> MOCK_PLUGIN_CONFIGS1;
-    private static final List<PluginConfig> MOCK_PLUGIN_CONFIGS2;
+    private static final PluginConfigData MOCK_PLUGIN_CONFIG1;
+    private static final PluginConfigData MOCK_PLUGIN_CONFIG2;
+    private static final PluginConfigData MOCK_PLUGIN_CONFIG3;
+    private static final Map<String, List<PluginConfigData>> MOCK_CONFIG;
+    private static final List<PluginConfigData> MOCK_PLUGIN_CONFIGS1;
+    private static final List<PluginConfigData> MOCK_PLUGIN_CONFIGS2;
 
     static
     {
-        MOCK_PLUGIN_CONFIG1 = PluginDataServiceTestHelper.generatePluginConfig(
+        MOCK_PLUGIN_CONFIG1 = PluginDataServiceTestHelper.generatePluginConfigData(
             MOCK_TARGET_DEVICE1,
             MOCK_PLUGIN_VERSION1,
             MOCK_PING_TIME1,
             Arrays.asList(
-                PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME1, MOCK_LOAD1),
-                PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME2, MOCK_LOAD2)));
-        MOCK_PLUGIN_CONFIG2 = PluginDataServiceTestHelper.generatePluginConfig(
+                PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, MOCK_LOAD1),
+                PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME2, MOCK_LOAD2)));
+        MOCK_PLUGIN_CONFIG2 = PluginDataServiceTestHelper.generatePluginConfigData(
             MOCK_TARGET_DEVICE2,
             MOCK_PLUGIN_VERSION2,
             MOCK_PING_TIME2,
-            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME2, 100)));
-        MOCK_PLUGIN_CONFIG3 = PluginDataServiceTestHelper.generatePluginConfig(
+            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME2, 100)));
+        MOCK_PLUGIN_CONFIG3 = PluginDataServiceTestHelper.generatePluginConfigData(
             MOCK_TARGET_DEVICE1,
             MOCK_PLUGIN_VERSION1,
             MOCK_PING_TIME1,
-            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME1, 100)));
+            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, 100)));
 
         MOCK_PLUGIN_CONFIGS1 = Arrays.asList(MOCK_PLUGIN_CONFIG1, MOCK_PLUGIN_CONFIG2);
         MOCK_PLUGIN_CONFIGS2 = Collections.singletonList(MOCK_PLUGIN_CONFIG3);
@@ -88,7 +88,7 @@ class PluginDataServicePropertiesTest
         // given
 
         // when
-        final Map<String, List<PluginConfig>> result = properties.getClientConfigs();
+        final Map<String, List<PluginConfigData>> result = properties.getClientConfigs();
 
         // then
         assertThat(result, is(MOCK_CONFIG));
@@ -103,10 +103,10 @@ class PluginDataServicePropertiesTest
     {
         // given
         final String mockAccountCode = MOCK_ACCOUNT_CODE1;
-        final List<PluginConfig> expectedResult = MOCK_PLUGIN_CONFIGS1;
+        final List<PluginConfigData> expectedResult = MOCK_PLUGIN_CONFIGS1;
 
         // when
-        final List<PluginConfig> result = properties.getClientConfig(mockAccountCode);
+        final List<PluginConfigData> result = properties.getClientConfig(mockAccountCode);
 
         // then
         assertNotNull(result);
@@ -123,7 +123,7 @@ class PluginDataServicePropertiesTest
         final String mockAccountCode = "mockUnknownAccountCode";
 
         // when
-        final List<PluginConfig> result = properties.getClientConfig(mockAccountCode);
+        final List<PluginConfigData> result = properties.getClientConfig(mockAccountCode);
 
         // then
         assertNull(result);

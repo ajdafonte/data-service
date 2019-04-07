@@ -26,7 +26,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper;
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 import com.npaw.techtest.plugindataservice.pluginconfig.bizz.PluginConfigService;
 import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
 
@@ -52,17 +52,18 @@ class PluginDataServiceTest
         // given
         final GetPluginDataParameter mockParameter =
             PluginDataServiceTestHelper.generateGetPluginDataParameter(MOCK_ACCOUNT_CODE1, MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1);
-        final PluginConfig pluginConfig = PluginDataServiceTestHelper.generatePluginConfig(MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1, MOCK_PING_TIME1,
-            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfig(MOCK_NAME1, 100)));
-        when(pluginConfigService.findPluginConfig(anyString(), anyString(), anyString())).thenReturn(Optional.of(pluginConfig));
+        final PluginConfigData
+            pluginConfigData = PluginDataServiceTestHelper.generatePluginConfigData(MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1, MOCK_PING_TIME1,
+            Collections.singletonList(PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, 100)));
+        when(pluginConfigService.findPluginConfig(anyString(), anyString(), anyString())).thenReturn(Optional.of(pluginConfigData));
 
         // when
         final PluginData result = pluginDataService.getPluginData(mockParameter);
 
         // then
         assertNotNull(result);
-        assertThat(result.host(), is(pluginConfig.getHosts().get(0).getName()));
-        assertThat(result.pingTime(), is(pluginConfig.getPingTime()));
+        assertThat(result.host(), is(pluginConfigData.getHosts().get(0).getName()));
+        assertThat(result.pingTime(), is(pluginConfigData.getPingTime()));
         assertThat(result.viewId(), instanceOf(String.class));
         verify(pluginConfigService, times(1)).findPluginConfig(
             mockParameter.accountCode(),

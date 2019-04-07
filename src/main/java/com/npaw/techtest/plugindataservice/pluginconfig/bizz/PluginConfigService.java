@@ -3,7 +3,7 @@ package com.npaw.techtest.plugindataservice.pluginconfig.bizz;
 import java.util.List;
 import java.util.Optional;
 
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 
 
 public interface PluginConfigService
@@ -14,13 +14,13 @@ public interface PluginConfigService
      * @param pluginVersion
      * @return
      */
-    Optional<PluginConfig> findPluginConfig(final String accountCode, final String targetDevice, final String pluginVersion);
+    Optional<PluginConfigData> findPluginConfig(final String accountCode, final String targetDevice, final String pluginVersion);
 
     /**
      * @param accountCode
      * @return
      */
-    Optional<List<PluginConfig>> getPluginConfigByClient(final String accountCode);
+    Optional<List<PluginConfigData>> getPluginConfigByClient(final String accountCode);
 
     /**
      * @param accountCode
@@ -29,10 +29,10 @@ public interface PluginConfigService
      * @param newPingTime
      * @return
      */
-    Optional<PluginConfig> updatePluginConfig(final String accountCode,
-                                              final String targetDevice,
-                                              final String newPluginVersion,
-                                              final int newPingTime);
+    Optional<PluginConfigData> updatePluginConfig(final String accountCode,
+                                                  final String targetDevice,
+                                                  final String newPluginVersion,
+                                                  final int newPingTime);
 
     /**
      * @param accountCode
@@ -41,8 +41,8 @@ public interface PluginConfigService
      * @param newHostLoad
      * @return
      */
-    Optional<PluginConfig> updatePluginHostConfig(final String accountCode,
-                                                  final String targetDevice,
-                                                  final String targetHost,
-                                                  final int newHostLoad);
+    Optional<PluginConfigData> updatePluginHostConfig(final String accountCode,
+                                                      final String targetDevice,
+                                                      final String targetHost,
+                                                      final int newHostLoad);
 }

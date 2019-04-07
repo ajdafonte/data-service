@@ -7,9 +7,9 @@ import java.util.function.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.npaw.techtest.plugindataservice.common.config.PluginDataServiceProperties;
-import com.npaw.techtest.plugindataservice.common.domain.HostConfig;
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.HostConfigData;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
+import com.npaw.techtest.plugindataservice.config.PluginDataServiceProperties;
 
 
 @Service
@@ -24,35 +24,35 @@ public class PluginConfigServiceImpl implements PluginConfigService
     }
 
     @Override
-    public Optional<List<PluginConfig>> getPluginConfigByClient(final String accountCode)
+    public Optional<List<PluginConfigData>> getPluginConfigByClient(final String accountCode)
     {
         return Optional.ofNullable(pluginDataServiceProperties.getClientConfig(accountCode));
     }
 
     @Override
-    public Optional<PluginConfig> findPluginConfig(final String accountCode, final String targetDevice, final String pluginVersion)
+    public Optional<PluginConfigData> findPluginConfig(final String accountCode, final String targetDevice, final String pluginVersion)
     {
         // retrieve client configuration
-        final Optional<List<PluginConfig>> clientPluginConfigs = getPluginConfigByClient(accountCode);
+        final Optional<List<PluginConfigData>> clientPluginConfigs = getPluginConfigByClient(accountCode);
 
         // check if targetDevice and pluginVersion belongs to specified client
-        final Predicate<PluginConfig> filterPredicate =
+        final Predicate<PluginConfigData> filterPredicate =
             pluginConfig -> pluginConfig.getTargetDevice().equals(targetDevice) && pluginConfig.getPluginVersion().equals(pluginVersion);
 
         return clientPluginConfigs.flatMap(pluginConfigs -> pluginConfigs.stream().filter(filterPredicate).findFirst());
     }
 
     @Override
-    public Optional<PluginConfig> updatePluginConfig(final String accountCode,
-                                                     final String targetDevice,
-                                                     final String newPluginVersion,
-                                                     final int newPingTime)
+    public Optional<PluginConfigData> updatePluginConfig(final String accountCode,
+                                                         final String targetDevice,
+                                                         final String newPluginVersion,
+                                                         final int newPingTime)
     {
         // retrieve client configuration
-        final Optional<List<PluginConfig>> clientPluginConfigs = getPluginConfigByClient(accountCode);
+        final Optional<List<PluginConfigData>> clientPluginConfigs = getPluginConfigByClient(accountCode);
 
         // check if targetDevice belongs to specified client
-        final Optional<PluginConfig> targetPluginConfig = clientPluginConfigs.flatMap(
+        final Optional<PluginConfigData> targetPluginConfig = clientPluginConfigs.flatMap(
             pluginConfigs -> pluginConfigs.stream()
                 .filter(pluginConfig -> pluginConfig.getTargetDevice().equals(targetDevice))
                 .findFirst());
@@ -67,23 +67,23 @@ public class PluginConfigServiceImpl implements PluginConfigService
     }
 
     @Override
-    public Optional<PluginConfig> updatePluginHostConfig(final String accountCode,
-                                                         final String targetDevice,
-                                                         final String targetHost,
-                                                         final int newHostLoad)
+    public Optional<PluginConfigData> updatePluginHostConfig(final String accountCode,
+                                                             final String targetDevice,
+                                                             final String targetHost,
+                                                             final int newHostLoad)
     {
         // retrieve client configuration
-        final Optional<List<PluginConfig>> clientPluginConfigs = getPluginConfigByClient(accountCode);
+        final Optional<List<PluginConfigData>> clientPluginConfigs = getPluginConfigByClient(accountCode);
 
         // check if targetDevice belongs to specified client
-        final Optional<PluginConfig> targetPluginConfig = clientPluginConfigs.flatMap(
+        final Optional<PluginConfigData> targetPluginConfig = clientPluginConfigs.flatMap(
             pluginConfigs -> pluginConfigs.stream()
                 .filter(pluginConfig -> pluginConfig.getTargetDevice().equals(targetDevice))
                 .findFirst());
 
         // try to update values
         targetPluginConfig.ifPresent(pluginConfig -> {
-            final List<HostConfig> hosts = pluginConfig.getHosts();
+            final List<HostConfigData> hosts = pluginConfig.getHosts();
             // find target host and if valid update host load
             hosts.stream()
                 .filter(hostConfig -> hostConfig.getName().equals(targetHost))

@@ -12,7 +12,7 @@ import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 import com.npaw.techtest.plugindataservice.pluginconfig.bizz.PluginConfigService;
 
 
@@ -39,7 +39,7 @@ public class PluginDataConfigJmxLauncher
     public String getConfigurationForClient(final String accountCode)
     {
         LOG.info(">> Receiving request from JMX to check if exists configuration for accountCode: {}", accountCode);
-        final Optional<List<PluginConfig>> clientConfig = pluginConfigService.getPluginConfigByClient(accountCode);
+        final Optional<List<PluginConfigData>> clientConfig = pluginConfigService.getPluginConfigByClient(accountCode);
         return clientConfig.map(Object::toString).orElse("Warning: Client configuration not found.");
     }
 
@@ -61,9 +61,9 @@ public class PluginDataConfigJmxLauncher
             targetDevice);
         LOG.info(">> New value for the plugin version = {}", newPluginVersion);
         LOG.info(">> New value for the ping time = {}", newPingTime);
-        final Optional<PluginConfig> updatedPluginConfig =
+        final Optional<PluginConfigData> updatedPluginConfig =
             pluginConfigService.updatePluginConfig(accountCode, targetDevice, newPluginVersion, newPingTime);
-        return updatedPluginConfig.map(PluginConfig::toString).orElse("Warning: Plugin configuration was not found.");
+        return updatedPluginConfig.map(PluginConfigData::toString).orElse("Warning: Plugin configuration was not found.");
     }
 
     @ManagedOperation(
@@ -85,9 +85,9 @@ public class PluginDataConfigJmxLauncher
             accountCode,
             targetDevice,
             hostName);
-        final Optional<PluginConfig> updatedPluginConfig =
+        final Optional<PluginConfigData> updatedPluginConfig =
             pluginConfigService.updatePluginHostConfig(accountCode, targetDevice, hostName, newHostLoad);
-        return updatedPluginConfig.map(PluginConfig::toString).orElse("Warning: Plugin configuration was not found.");
+        return updatedPluginConfig.map(PluginConfigData::toString).orElse("Warning: Plugin configuration was not found.");
     }
 
 }

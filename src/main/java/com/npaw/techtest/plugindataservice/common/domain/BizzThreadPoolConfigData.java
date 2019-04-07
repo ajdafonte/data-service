@@ -1,7 +1,5 @@
 package com.npaw.techtest.plugindataservice.common.domain;
 
-import java.util.List;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +12,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class PluginConfig
+public class BizzThreadPoolConfigData
 {
-    private String targetDevice;
-    private String pluginVersion;
-    private int pingTime = 5;
-    private List<HostConfig> hosts;
+    private int corePoolSize;
+    private int maxPoolSize;
+    private int keepAliveTime;
 }

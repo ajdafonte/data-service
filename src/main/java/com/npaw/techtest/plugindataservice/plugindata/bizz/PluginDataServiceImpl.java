@@ -8,8 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.npaw.techtest.plugindataservice.common.domain.HostConfig;
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.HostConfigData;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 import com.npaw.techtest.plugindataservice.pluginconfig.bizz.PluginConfigService;
 import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
 
@@ -28,18 +28,18 @@ public class PluginDataServiceImpl implements PluginDataService
     @Override
     public PluginData getPluginData(final GetPluginDataParameter parameter)
     {
-        final Optional<PluginConfig> clientDevice = pluginConfigService.findPluginConfig(parameter.accountCode(),
+        final Optional<PluginConfigData> clientDevice = pluginConfigService.findPluginConfig(parameter.accountCode(),
             parameter.targetDevice(), parameter.pluginVersion());
 
         return clientDevice.map(pluginConfig ->
             new PluginData(getHost(pluginConfig.getHosts()).getName(), pluginConfig.getPingTime(), UUID.randomUUID().toString())).orElse(null);
     }
 
-    private HostConfig getHost(final List<HostConfig> hosts)
+    private HostConfigData getHost(final List<HostConfigData> hosts)
     {
         final int rand = ThreadLocalRandom.current().nextInt(100);
         int prob = 0;
-        for (final HostConfig host : hosts)
+        for (final HostConfigData host : hosts)
         {
             prob += host.getLoad();
             if (rand <= prob)

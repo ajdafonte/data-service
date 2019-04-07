@@ -7,7 +7,7 @@ import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MO
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PING_TIME1;
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION1;
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_TARGET_DEVICE1;
-import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.generatePluginConfig;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.generatePluginConfigData;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,7 +27,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper;
-import com.npaw.techtest.plugindataservice.common.domain.PluginConfig;
+import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 import com.npaw.techtest.plugindataservice.pluginconfig.bizz.PluginConfigService;
 
 
@@ -51,8 +51,8 @@ class PluginDataConfigJmxLauncherTest
     {
         // given
         final String mockAccountCode = MOCK_ACCOUNT_CODE1;
-        final List<PluginConfig> expectedClientConfig = Collections.singletonList(
-            PluginDataServiceTestHelper.generatePluginConfig(MOCK_TARGET_DEVICE1,
+        final List<PluginConfigData> expectedClientConfig = Collections.singletonList(
+            PluginDataServiceTestHelper.generatePluginConfigData(MOCK_TARGET_DEVICE1,
                 MOCK_PLUGIN_VERSION1,
                 MOCK_PING_TIME1,
                 MOCK_HOSTS1));
@@ -96,14 +96,14 @@ class PluginDataConfigJmxLauncherTest
         final String mockTargetDevice = MOCK_TARGET_DEVICE1;
         final String mockNewPluginVersion = "mockNewPluginVersion";
         final int mockNewPingTime = 100;
-        final PluginConfig expectedPluginConfig =
-            generatePluginConfig(MOCK_TARGET_DEVICE1,
+        final PluginConfigData expectedPluginConfigData =
+            generatePluginConfigData(MOCK_TARGET_DEVICE1,
                 mockNewPluginVersion,
                 mockNewPingTime,
                 MOCK_HOSTS1);
         when(pluginConfigService
             .updatePluginConfig(mockAccountCode, mockTargetDevice, mockNewPluginVersion, mockNewPingTime))
-            .thenReturn(Optional.of(expectedPluginConfig));
+            .thenReturn(Optional.of(expectedPluginConfigData));
 
         // when
         final String result =
@@ -111,7 +111,7 @@ class PluginDataConfigJmxLauncherTest
 
         // then
         assertNotNull(result);
-        assertThat(result, is(expectedPluginConfig.toString()));
+        assertThat(result, is(expectedPluginConfigData.toString()));
     }
 
     // updateClientPluginConfiguration - nok (unknownClient or unknownTargetDevice)
@@ -149,14 +149,14 @@ class PluginDataConfigJmxLauncherTest
         final String mockTargetDevice = MOCK_TARGET_DEVICE1;
         final String mockHostName = MOCK_NAME1;
         final int mockNewHostLoad = 75;
-        final PluginConfig expectedPluginConfig =
-            generatePluginConfig(mockTargetDevice,
+        final PluginConfigData expectedPluginConfigData =
+            generatePluginConfigData(mockTargetDevice,
                 MOCK_PLUGIN_VERSION1,
                 MOCK_PING_TIME1,
-                Collections.singletonList(PluginDataServiceTestHelper.generateHostConfig(mockHostName, MOCK_LOAD1)));
+                Collections.singletonList(PluginDataServiceTestHelper.generateHostConfigData(mockHostName, MOCK_LOAD1)));
         when(pluginConfigService
             .updatePluginHostConfig(mockAccountCode, mockTargetDevice, mockHostName, mockNewHostLoad))
-            .thenReturn(Optional.of(expectedPluginConfig));
+            .thenReturn(Optional.of(expectedPluginConfigData));
 
         // when
         final String result =
@@ -164,7 +164,7 @@ class PluginDataConfigJmxLauncherTest
 
         // then
         assertNotNull(result);
-        assertThat(result, is(expectedPluginConfig.toString()));
+        assertThat(result, is(expectedPluginConfigData.toString()));
     }
 
     // updateClientPluginHostConfiguration - nok (unknownClient or unknownTargetDevice or unknownHostName)
