@@ -7,7 +7,6 @@ import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MO
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PING_TIME1;
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION1;
 import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_TARGET_DEVICE1;
-import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.generatePluginConfigData;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -97,10 +96,7 @@ class PluginDataConfigJmxLauncherTest
         final String mockNewPluginVersion = "mockNewPluginVersion";
         final int mockNewPingTime = 100;
         final PluginConfigData expectedPluginConfigData =
-            generatePluginConfigData(MOCK_TARGET_DEVICE1,
-                mockNewPluginVersion,
-                mockNewPingTime,
-                MOCK_HOSTS1);
+            PluginDataServiceTestHelper.generatePluginConfigData(MOCK_TARGET_DEVICE1, mockNewPluginVersion, mockNewPingTime, MOCK_HOSTS1);
         when(pluginConfigService
             .updatePluginConfig(mockAccountCode, mockTargetDevice, mockNewPluginVersion, mockNewPingTime))
             .thenReturn(Optional.of(expectedPluginConfigData));
@@ -150,9 +146,7 @@ class PluginDataConfigJmxLauncherTest
         final String mockHostName = MOCK_NAME1;
         final int mockNewHostLoad = 75;
         final PluginConfigData expectedPluginConfigData =
-            generatePluginConfigData(mockTargetDevice,
-                MOCK_PLUGIN_VERSION1,
-                MOCK_PING_TIME1,
+            PluginDataServiceTestHelper.generatePluginConfigData(mockTargetDevice, MOCK_PLUGIN_VERSION1, MOCK_PING_TIME1,
                 Collections.singletonList(PluginDataServiceTestHelper.generateHostConfigData(mockHostName, MOCK_LOAD1)));
         when(pluginConfigService
             .updatePluginHostConfig(mockAccountCode, mockTargetDevice, mockHostName, mockNewHostLoad))

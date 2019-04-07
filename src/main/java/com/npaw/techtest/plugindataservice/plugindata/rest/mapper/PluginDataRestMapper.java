@@ -11,9 +11,9 @@ public class PluginDataRestMapper
         if (pluginData != null)
         {
             final PluginDataRest pluginDataRest = new PluginDataRest();
-            pluginDataRest.setHost(pluginData.host());
-            pluginDataRest.setPingTime(pluginData.pingTime());
-            pluginDataRest.setViewId(pluginData.viewId());
+            pluginDataRest.setHost(pluginData.getHost());
+            pluginDataRest.setPingTime(pluginData.getPingTime());
+            pluginDataRest.setViewId(pluginData.getViewId());
             return pluginDataRest;
         }
         return null;

@@ -19,7 +19,7 @@ class BizzThreadPoolConfigDataTest
 
     // equals ok
     @Test
-    void givenTwoEqualBizzThreadPoolConfigDatas_whenCheckIfEquals_thenBothBizzThreadPoolConfigDatasMustBeEquals()
+    void givenTwoEqualBizzThreadPoolConfigData_whenCheckIfEquals_thenBothBizzThreadPoolConfigDatasMustBeEquals()
     {
         // given
         final BizzThreadPoolConfigData mockBizzThreadPoolConfigData1 =

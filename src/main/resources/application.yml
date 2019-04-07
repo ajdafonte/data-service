@@ -12,12 +12,12 @@ pluginDataService:
     corePoolSize: 8
     maxPoolSize: 16
     keepAliveTime: 60
-  clientConfigs:
+  clientsConfigs:
     clientA:
       - targetDevice: "XBox"
         pluginVersion: "3.3.1"
         pingTime: 10
-        hosts:
+        hostsConfig:
         - name: "clusterA.com"
           load: 70
         - name: "clusterB.com"
@@ -25,14 +25,14 @@ pluginDataService:
       - targetDevice: "Panasonic"
         pluginVersion: "3.3.2"
         pingTime: 5
-        hosts:
+        hostsConfig:
         - name: "clusterB.com"
           load: 100
     clientB:
       - targetDevice: "osmf"
         pluginVersion: "3.3.1"
         pingTime: 5
-        hosts:
+        hostsConfig:
         - name: "clusterA.com"
           load: 50
         - name: "clusterB.com"

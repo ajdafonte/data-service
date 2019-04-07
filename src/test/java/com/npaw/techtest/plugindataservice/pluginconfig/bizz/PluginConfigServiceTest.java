@@ -134,7 +134,7 @@ class PluginConfigServiceTest
         verifyNoMoreInteractions(pluginDataServiceProperties);
     }
 
-    // findPluginConfig - nok (client ok but targetdevice does not exist)
+    // findPluginConfig - nok (client ok but target device does not exist)
     @Test
     void givenExistentAccountCodeAndUnknownTargetDevice_whenFindPluginConfig_thenReturnEmptyValue()
     {

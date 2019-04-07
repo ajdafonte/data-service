@@ -15,6 +15,7 @@ import com.npaw.techtest.plugindataservice.common.domain.PluginConfigData;
 public class PluginDataServiceProperties
 {
     private BizzThreadPoolConfigData bizzThreadPoolConfig;
+    private ConcurrentHashMap<String, List<PluginConfigData>> clientsConfigs;
 
     public BizzThreadPoolConfigData getBizzThreadPoolConfig()
     {
@@ -26,21 +27,19 @@ public class PluginDataServiceProperties
         this.bizzThreadPoolConfig = bizzThreadPoolConfig;
     }
 
-    private ConcurrentHashMap<String, List<PluginConfigData>> clientConfigs;
-
-    public ConcurrentHashMap<String, List<PluginConfigData>> getClientConfigs()
+    public ConcurrentHashMap<String, List<PluginConfigData>> getClientsConfigs()
     {
-        return clientConfigs;
+        return clientsConfigs;
     }
 
-    public void setClientConfigs(final ConcurrentHashMap<String, List<PluginConfigData>> clientConfigs)
+    public void setClientsConfigs(final ConcurrentHashMap<String, List<PluginConfigData>> clientsConfigs)
     {
-        this.clientConfigs = clientConfigs;
+        this.clientsConfigs = clientsConfigs;
     }
 
     public List<PluginConfigData> getClientConfig(final String accountCode)
     {
-        return clientConfigs.get(accountCode);
+        return clientsConfigs.get(accountCode);
     }
 
 }

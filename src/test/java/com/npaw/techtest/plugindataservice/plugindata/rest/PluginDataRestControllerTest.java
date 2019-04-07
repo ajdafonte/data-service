@@ -68,9 +68,9 @@ class PluginDataRestControllerTest
         // when
         final ResultActions result =
             mockMvc.perform(get(PLUGIN_DATA_URI)
-                .param("accountCode", mockParameter.accountCode())
-                .param("targetDevice", mockParameter.targetDevice())
-                .param("pluginVersion", mockParameter.pluginVersion())
+                .param("accountCode", mockParameter.getAccountCode())
+                .param("targetDevice", mockParameter.getTargetDevice())
+                .param("pluginVersion", mockParameter.getPluginVersion())
                 .contentType(MediaType.APPLICATION_XML_VALUE));
 
         // then
@@ -90,9 +90,9 @@ class PluginDataRestControllerTest
         // when
         final ResultActions result =
             mockMvc.perform(get(PLUGIN_DATA_URI)
-                .param("accountCode", mockParameter.accountCode())
-                .param("targetDevice", mockParameter.targetDevice())
-                .param("pluginVersion", mockParameter.pluginVersion())
+                .param("accountCode", mockParameter.getAccountCode())
+                .param("targetDevice", mockParameter.getTargetDevice())
+                .param("pluginVersion", mockParameter.getPluginVersion())
                 .contentType(MediaType.APPLICATION_XML_VALUE));
 
         // then
@@ -112,8 +112,8 @@ class PluginDataRestControllerTest
         // when
         final ResultActions result =
             mockMvc.perform(get(PLUGIN_DATA_URI)
-                .param("targetDevice", mockParameter.targetDevice())
-                .param("pluginVersion", mockParameter.pluginVersion())
+                .param("targetDevice", mockParameter.getTargetDevice())
+                .param("pluginVersion", mockParameter.getPluginVersion())
                 .contentType(MediaType.APPLICATION_XML_VALUE));
 
         // then

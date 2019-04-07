@@ -19,5 +19,5 @@ public class PluginConfigData
     private String targetDevice;
     private String pluginVersion;
     private int pingTime = 5;
-    private List<HostConfigData> hosts;
+    private List<HostConfigData> hostsConfig;
 }

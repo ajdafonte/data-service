@@ -51,7 +51,7 @@ public class PluginDataServiceTestHelper
         pluginConfigData.setTargetDevice(targetDevice);
         pluginConfigData.setPluginVersion(pluginVersion);
         pluginConfigData.setPingTime(pingTime);
-        pluginConfigData.setHosts(hosts);
+        pluginConfigData.setHostsConfig(hosts);
         return pluginConfigData;
     }
 

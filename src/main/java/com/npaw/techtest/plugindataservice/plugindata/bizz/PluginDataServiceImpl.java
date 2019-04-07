@@ -28,11 +28,11 @@ public class PluginDataServiceImpl implements PluginDataService
     @Override
     public PluginData getPluginData(final GetPluginDataParameter parameter)
     {
-        final Optional<PluginConfigData> clientDevice = pluginConfigService.findPluginConfig(parameter.accountCode(),
-            parameter.targetDevice(), parameter.pluginVersion());
+        final Optional<PluginConfigData> clientDevice = pluginConfigService.findPluginConfig(parameter.getAccountCode(),
+            parameter.getTargetDevice(), parameter.getPluginVersion());
 
         return clientDevice.map(pluginConfig ->
-            new PluginData(getHost(pluginConfig.getHosts()).getName(), pluginConfig.getPingTime(), UUID.randomUUID().toString())).orElse(null);
+            new PluginData(getHost(pluginConfig.getHostsConfig()).getName(), pluginConfig.getPingTime(), UUID.randomUUID().toString())).orElse(null);
     }
 
     private HostConfigData getHost(final List<HostConfigData> hosts)

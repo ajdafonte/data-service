@@ -83,7 +83,7 @@ public class PluginConfigServiceImpl implements PluginConfigService
 
         // try to update values
         targetPluginConfig.ifPresent(pluginConfig -> {
-            final List<HostConfigData> hosts = pluginConfig.getHosts();
+            final List<HostConfigData> hosts = pluginConfig.getHostsConfig();
             // find target host and if valid update host load
             hosts.stream()
                 .filter(hostConfig -> hostConfig.getName().equals(targetHost))

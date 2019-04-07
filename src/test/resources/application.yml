@@ -3,12 +3,12 @@ pluginDataService:
     corePoolSize: 8
     maxPoolSize: 16
     keepAliveTime: 60
-  clientConfigs:
+  clientsConfigs:
     mockAccountCode1:
       - targetDevice: "mockDevice1"
         pluginVersion: "mockPluginVersion1"
         pingTime: 1
-        hosts:
+        hostsConfig:
         - name: "mockCluster1"
           load: 60
         - name: "mockCluster2"
@@ -16,13 +16,13 @@ pluginDataService:
       - targetDevice: "mockDevice2"
         pluginVersion: "mockPluginVersion2"
         pingTime: 10
-        hosts:
+        hostsConfig:
         - name: "mockCluster2"
           load: 100
     mockAccountCode2:
     - targetDevice: "mockDevice1"
       pluginVersion: "mockPluginVersion1"
       pingTime: 1
-      hosts:
+      hostsConfig:
       - name: "mockCluster1"
         load: 100

@@ -1,5 +1,11 @@
 package com.npaw.techtest.plugindataservice.plugindata.rest;
 
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_NAME1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_NAME2;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PING_TIME1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PING_TIME2;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_VIEW_ID1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_VIEW_ID2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -16,13 +22,9 @@ class PluginDataRestTest
     {
         // given
         final PluginDataRest mockPluginDataRest1 =
-            PluginDataServiceTestHelper.generatePluginDataRest(PluginDataServiceTestHelper.MOCK_NAME1,
-                PluginDataServiceTestHelper.MOCK_PING_TIME1,
-                PluginDataServiceTestHelper.MOCK_VIEW_ID1);
+            PluginDataServiceTestHelper.generatePluginDataRest(MOCK_NAME1, MOCK_PING_TIME1, MOCK_VIEW_ID1);
         final PluginDataRest mockPluginDataRest2 =
-            PluginDataServiceTestHelper.generatePluginDataRest(PluginDataServiceTestHelper.MOCK_NAME1,
-                PluginDataServiceTestHelper.MOCK_PING_TIME1,
-                PluginDataServiceTestHelper.MOCK_VIEW_ID1);
+            PluginDataServiceTestHelper.generatePluginDataRest(MOCK_NAME1, MOCK_PING_TIME1, MOCK_VIEW_ID1);
 
         // when + then
         assertEquals(mockPluginDataRest1.hashCode(), mockPluginDataRest2.hashCode());
@@ -35,13 +37,9 @@ class PluginDataRestTest
     {
         // given
         final PluginDataRest mockPluginDataRest1 =
-            PluginDataServiceTestHelper.generatePluginDataRest(PluginDataServiceTestHelper.MOCK_NAME1,
-                PluginDataServiceTestHelper.MOCK_PING_TIME1,
-                PluginDataServiceTestHelper.MOCK_VIEW_ID1);
+            PluginDataServiceTestHelper.generatePluginDataRest(MOCK_NAME1, MOCK_PING_TIME1, MOCK_VIEW_ID1);
         final PluginDataRest mockPluginDataRest2 =
-            PluginDataServiceTestHelper.generatePluginDataRest(PluginDataServiceTestHelper.MOCK_NAME2,
-                PluginDataServiceTestHelper.MOCK_PING_TIME2,
-                PluginDataServiceTestHelper.MOCK_VIEW_ID2);
+            PluginDataServiceTestHelper.generatePluginDataRest(MOCK_NAME2, MOCK_PING_TIME2, MOCK_VIEW_ID2);
 
         // when + then
         assertNotEquals(mockPluginDataRest1.hashCode(), mockPluginDataRest2.hashCode());
@@ -54,9 +52,7 @@ class PluginDataRestTest
     {
         // given
         final PluginDataRest mockPluginDataRest =
-            PluginDataServiceTestHelper.generatePluginDataRest(PluginDataServiceTestHelper.MOCK_NAME1,
-                PluginDataServiceTestHelper.MOCK_PING_TIME1,
-                PluginDataServiceTestHelper.MOCK_VIEW_ID1);
+            PluginDataServiceTestHelper.generatePluginDataRest(MOCK_NAME1, MOCK_PING_TIME1, MOCK_VIEW_ID1);
         final String expected = "PluginDataRest{" +
             "host='" + mockPluginDataRest.getHost() + '\'' +
             ", pingTime=" + mockPluginDataRest.getPingTime() +

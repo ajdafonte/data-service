@@ -6,10 +6,10 @@ import com.npaw.techtest.plugindataservice.plugindata.domain.PluginData;
 public interface PluginDataService
 {
     /**
-     * TODO add description
+     * Retrieve a plugin data information considering some parameters.
      *
-     * @param parameter
-     * @return
+     * @param parameter the {@link GetPluginDataParameter} object that contains some query parameters to find the desired plugin config.
+     * @return the {@link PluginData} object.
      */
     PluginData getPluginData(GetPluginDataParameter parameter);
 }

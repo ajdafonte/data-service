@@ -1,5 +1,11 @@
 package com.npaw.techtest.plugindataservice.plugindata.bizz;
 
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE2;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION2;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_TARGET_DEVICE1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_TARGET_DEVICE2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -16,13 +22,9 @@ class GetPluginDataParameterTest
     {
         // given
         final GetPluginDataParameter mockGetPluginDataParameter1 =
-            PluginDataServiceTestHelper.generateGetPluginDataParameter(PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE1,
-                PluginDataServiceTestHelper.MOCK_TARGET_DEVICE1,
-                PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION1);
+            PluginDataServiceTestHelper.generateGetPluginDataParameter(MOCK_ACCOUNT_CODE1, MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1);
         final GetPluginDataParameter mockGetPluginDataParameter2 =
-            PluginDataServiceTestHelper.generateGetPluginDataParameter(PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE1,
-                PluginDataServiceTestHelper.MOCK_TARGET_DEVICE1,
-                PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION1);
+            PluginDataServiceTestHelper.generateGetPluginDataParameter(MOCK_ACCOUNT_CODE1, MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1);
 
         // when + then
         assertEquals(mockGetPluginDataParameter1.hashCode(), mockGetPluginDataParameter2.hashCode());
@@ -35,13 +37,9 @@ class GetPluginDataParameterTest
     {
         // given
         final GetPluginDataParameter mockGetPluginDataParameter1 =
-            PluginDataServiceTestHelper.generateGetPluginDataParameter(PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE1,
-                PluginDataServiceTestHelper.MOCK_TARGET_DEVICE1,
-                PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION1);
+            PluginDataServiceTestHelper.generateGetPluginDataParameter(MOCK_ACCOUNT_CODE1, MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1);
         final GetPluginDataParameter mockGetPluginDataParameter2 =
-            PluginDataServiceTestHelper.generateGetPluginDataParameter(PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE2,
-                PluginDataServiceTestHelper.MOCK_TARGET_DEVICE2,
-                PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION2);
+            PluginDataServiceTestHelper.generateGetPluginDataParameter(MOCK_ACCOUNT_CODE2, MOCK_TARGET_DEVICE2, MOCK_PLUGIN_VERSION2);
 
         // when + then
         assertNotEquals(mockGetPluginDataParameter1.hashCode(), mockGetPluginDataParameter2.hashCode());
@@ -54,13 +52,11 @@ class GetPluginDataParameterTest
     {
         // given
         final GetPluginDataParameter mockGetPluginDataParameter =
-            PluginDataServiceTestHelper.generateGetPluginDataParameter(PluginDataServiceTestHelper.MOCK_ACCOUNT_CODE1,
-                PluginDataServiceTestHelper.MOCK_TARGET_DEVICE1,
-                PluginDataServiceTestHelper.MOCK_PLUGIN_VERSION1);
+            PluginDataServiceTestHelper.generateGetPluginDataParameter(MOCK_ACCOUNT_CODE1, MOCK_TARGET_DEVICE1, MOCK_PLUGIN_VERSION1);
         final String expected = "GetPluginDataParameter(" +
-            "accountCode=" + mockGetPluginDataParameter.accountCode() +
-            ", targetDevice=" + mockGetPluginDataParameter.targetDevice() +
-            ", pluginVersion=" + mockGetPluginDataParameter.pluginVersion() +
+            "accountCode=" + mockGetPluginDataParameter.getAccountCode() +
+            ", targetDevice=" + mockGetPluginDataParameter.getTargetDevice() +
+            ", pluginVersion=" + mockGetPluginDataParameter.getPluginVersion() +
             ')';
 
         // when

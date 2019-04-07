@@ -1,5 +1,8 @@
 package com.npaw.techtest.plugindataservice.plugindata.rest.mapper;
 
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_NAME1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_PING_TIME1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_VIEW_ID1;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,18 +22,16 @@ class PluginDataRestMapperTest
     void givenValidPluginData_whenMapToRest_thenReturnPluginDataRestObject()
     {
         // given
-        final PluginData mockPluginData = PluginDataServiceTestHelper.generatePluginData(PluginDataServiceTestHelper.MOCK_NAME1,
-            PluginDataServiceTestHelper.MOCK_PING_TIME1,
-            PluginDataServiceTestHelper.MOCK_VIEW_ID1);
+        final PluginData mockPluginData = PluginDataServiceTestHelper.generatePluginData(MOCK_NAME1, MOCK_PING_TIME1, MOCK_VIEW_ID1);
 
         // when
         final PluginDataRest result = PluginDataRestMapper.map(mockPluginData);
 
         // then
         assertNotNull(result);
-        assertThat(result.getHost(), is(mockPluginData.host()));
-        assertThat(result.getPingTime(), is(mockPluginData.pingTime()));
-        assertThat(result.getViewId(), is(mockPluginData.viewId()));
+        assertThat(result.getHost(), is(mockPluginData.getHost()));
+        assertThat(result.getPingTime(), is(mockPluginData.getPingTime()));
+        assertThat(result.getViewId(), is(mockPluginData.getViewId()));
     }
 
     // map - null

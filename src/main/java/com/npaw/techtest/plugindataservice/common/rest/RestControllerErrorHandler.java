@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.npaw.techtest.plugindataservice.common.error.PluginDataServiceApiError;
+import com.npaw.techtest.plugindataservice.common.error.PluginDataServiceError;
 
 
 /**
- * Handles all exceptions for all REST controllers and translates them to a proper error response. Because we don't limit it to RestController.class,
- * it also deals with both @{@link org.springframework.web.HttpMediaTypeException}.
+ * Handles all exceptions for all REST controllers and translates them to a proper error response.
  */
 @ControllerAdvice
 public class RestControllerErrorHandler
@@ -29,7 +28,7 @@ public class RestControllerErrorHandler
     @ResponseBody
     PluginDataServiceErrorRest handleException(final HttpServletRequest request, final Exception e)
     {
-        return new PluginDataServiceErrorRest(request, PluginDataServiceApiError.INTERNAL_SERVER_ERROR);
+        return new PluginDataServiceErrorRest(request, PluginDataServiceError.INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -45,14 +44,7 @@ public class RestControllerErrorHandler
             .findFirst()    // Path
             .map(this::omitMethodPrefix)
             .orElse("null");
-        return new PluginDataServiceErrorRest(request, PluginDataServiceApiError.INVALID_REQUEST_PARAMETER, message);
-    }
-
-    private String omitMethodPrefix(final Path path)
-    {
-        final String pathString = path.toString();
-        final String[] segments = pathString.split("\\.");
-        return segments.length > 1 ? String.join(".", Arrays.copyOfRange(segments, 1, segments.length)) : pathString;
+        return new PluginDataServiceErrorRest(request, PluginDataServiceError.INVALID_REQUEST_PARAMETER, message);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -61,6 +53,13 @@ public class RestControllerErrorHandler
     PluginDataServiceErrorRest handleMissingServletRequestParameter(final HttpServletRequest request,
                                                                     final MissingServletRequestParameterException exception)
     {
-        return new PluginDataServiceErrorRest(request, PluginDataServiceApiError.INVALID_REQUEST, exception.getMessage());
+        return new PluginDataServiceErrorRest(request, PluginDataServiceError.INVALID_REQUEST, exception.getMessage());
+    }
+
+    private String omitMethodPrefix(final Path path)
+    {
+        final String pathString = path.toString();
+        final String[] segments = pathString.split("\\.");
+        return segments.length > 1 ? String.join(".", Arrays.copyOfRange(segments, 1, segments.length)) : pathString;
     }
 }

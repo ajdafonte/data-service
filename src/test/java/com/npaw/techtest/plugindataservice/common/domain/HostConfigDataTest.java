@@ -1,5 +1,9 @@
 package com.npaw.techtest.plugindataservice.common.domain;
 
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_LOAD1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_LOAD2;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_NAME1;
+import static com.npaw.techtest.plugindataservice.PluginDataServiceTestHelper.MOCK_NAME2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -16,9 +20,9 @@ class HostConfigDataTest
     {
         // given
         final HostConfigData mockHostConfigData1 =
-            PluginDataServiceTestHelper.generateHostConfigData(PluginDataServiceTestHelper.MOCK_NAME1, PluginDataServiceTestHelper.MOCK_LOAD1);
+            PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, MOCK_LOAD1);
         final HostConfigData mockHostConfigData2 =
-            PluginDataServiceTestHelper.generateHostConfigData(PluginDataServiceTestHelper.MOCK_NAME1, PluginDataServiceTestHelper.MOCK_LOAD1);
+            PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, MOCK_LOAD1);
 
         // when + then
         assertEquals(mockHostConfigData1.hashCode(), mockHostConfigData2.hashCode());
@@ -31,9 +35,9 @@ class HostConfigDataTest
     {
         // given
         final HostConfigData mockHostConfigData1 =
-            PluginDataServiceTestHelper.generateHostConfigData(PluginDataServiceTestHelper.MOCK_NAME1, PluginDataServiceTestHelper.MOCK_LOAD1);
+            PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, MOCK_LOAD1);
         final HostConfigData mockHostConfigData2 =
-            PluginDataServiceTestHelper.generateHostConfigData(PluginDataServiceTestHelper.MOCK_NAME2, PluginDataServiceTestHelper.MOCK_LOAD2);
+            PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME2, MOCK_LOAD2);
 
         // when + then
         assertNotEquals(mockHostConfigData1.hashCode(), mockHostConfigData2.hashCode());
@@ -46,7 +50,7 @@ class HostConfigDataTest
     {
         // given
         final HostConfigData mockHostConfigData =
-            PluginDataServiceTestHelper.generateHostConfigData(PluginDataServiceTestHelper.MOCK_NAME1, PluginDataServiceTestHelper.MOCK_LOAD1);
+            PluginDataServiceTestHelper.generateHostConfigData(MOCK_NAME1, MOCK_LOAD1);
         final String expected = "HostConfigData(" +
             "name=" + mockHostConfigData.getName() +
             ", load=" + mockHostConfigData.getLoad() +

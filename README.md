@@ -80,12 +80,12 @@ The following JMX operations were implemented in order to manage the update, at 
 
 All of these operations returns a String with the result of the operation (an object or an error message).
 
-- Instructions on how to access those operations
-    - Open [JConsole](https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html) application
-    - Connect to plugin-data-service component
-    - Go to MBeans tab
-    - Search for node `com.npaw.techtest.plugindataservice:PluginDataConfig`
-    - Open 'Operations' node 
+Instructions on how to access those operations
+1. Open [JConsole](https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html) application
+2. Connect to plugin-data-service component
+3. Go to MBeans tab
+4. Search for node `com.npaw.techtest.plugindataservice:PluginDataConfig`
+5. Open 'Operations' node 
  
 
 ### Additional Remarks

@@ -88,7 +88,7 @@ class PluginDataServicePropertiesTest
         // given
 
         // when
-        final Map<String, List<PluginConfigData>> result = properties.getClientConfigs();
+        final Map<String, List<PluginConfigData>> result = properties.getClientsConfigs();
 
         // then
         assertThat(result, is(MOCK_CONFIG));
@@ -102,15 +102,13 @@ class PluginDataServicePropertiesTest
     void givenExistentAccountCode_whenGetClientConfig_thenReturnExpectedClientConfig()
     {
         // given
-        final String mockAccountCode = MOCK_ACCOUNT_CODE1;
-        final List<PluginConfigData> expectedResult = MOCK_PLUGIN_CONFIGS1;
 
         // when
-        final List<PluginConfigData> result = properties.getClientConfig(mockAccountCode);
+        final List<PluginConfigData> result = properties.getClientConfig(MOCK_ACCOUNT_CODE1);
 
         // then
         assertNotNull(result);
-        assertThat(result, is(expectedResult));
+        assertThat(result, is(MOCK_PLUGIN_CONFIGS1));
         assertThat(result.size(), is(2));
         assertThat(result, IsIterableContainingInAnyOrder.containsInAnyOrder(MOCK_PLUGIN_CONFIG1, MOCK_PLUGIN_CONFIG2));
     }

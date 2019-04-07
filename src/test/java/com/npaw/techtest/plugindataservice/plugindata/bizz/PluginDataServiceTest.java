@@ -62,13 +62,13 @@ class PluginDataServiceTest
 
         // then
         assertNotNull(result);
-        assertThat(result.host(), is(pluginConfigData.getHosts().get(0).getName()));
-        assertThat(result.pingTime(), is(pluginConfigData.getPingTime()));
-        assertThat(result.viewId(), instanceOf(String.class));
+        assertThat(result.getHost(), is(pluginConfigData.getHostsConfig().get(0).getName()));
+        assertThat(result.getPingTime(), is(pluginConfigData.getPingTime()));
+        assertThat(result.getViewId(), instanceOf(String.class));
         verify(pluginConfigService, times(1)).findPluginConfig(
-            mockParameter.accountCode(),
-            mockParameter.targetDevice(),
-            mockParameter.pluginVersion()
+            mockParameter.getAccountCode(),
+            mockParameter.getTargetDevice(),
+            mockParameter.getPluginVersion()
         );
         verifyNoMoreInteractions(pluginConfigService);
     }
@@ -88,9 +88,9 @@ class PluginDataServiceTest
         // then
         assertNull(result);
         verify(pluginConfigService, times(1)).findPluginConfig(
-            mockParameter.accountCode(),
-            mockParameter.targetDevice(),
-            mockParameter.pluginVersion()
+            mockParameter.getAccountCode(),
+            mockParameter.getTargetDevice(),
+            mockParameter.getPluginVersion()
         );
         verifyNoMoreInteractions(pluginConfigService);
     }
