@@ -5,15 +5,24 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-/**
- *
- */
+
+@ApiModel(
+    value = "PluginData",
+    description = "A PluginData information"
+)
 @XmlRootElement(name = "q")
 public class PluginDataRest
 {
+    @ApiModelProperty(value = "The host name from which the plugin should send the information.")
     private String host;
+
+    @ApiModelProperty(value = "The ping time used by the device.")
     private int pingTime;
+
+    @ApiModelProperty(value = "Code that identifies a view.")
     private String viewId;
 
     public PluginDataRest()

@@ -38,6 +38,12 @@ dependencies {
     implementation("org.springframework.boot", "spring-boot-devtools")
     implementation("org.springframework.boot", "spring-boot-starter-actuator")
 
+    // swagger
+    // IMPORTANT: Use this version. Why?
+    // See: https://github.com/springfox/springfox/issues/2528 & https://github.com/springfox/springfox/issues/2265
+    implementation("io.springfox", "springfox-swagger2", "2.8.0")
+    implementation("io.springfox", "springfox-swagger-ui", "2.8.0")
+
     // testing
     testImplementation("org.springframework.boot", "spring-boot-starter-test") {
         // Exclude JUnit 4 from starter-test, because it will be used JUnit 5
